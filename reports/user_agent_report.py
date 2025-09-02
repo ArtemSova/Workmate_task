@@ -1,3 +1,10 @@
+"""
+Модуль отчета по распределению User-Agent строк.
+
+Этот модуль предоставляет класс UserAgentReport для анализа
+распределения User-Agent строк на основе логов веб-сервера.
+"""
+
 from collections import Counter
 from utils.log_parser import _try_parse_json
 from .base import BaseReport
@@ -72,5 +79,3 @@ class UserAgentReport(BaseReport):
 
         # Возврат обычного словаря вместо Counter для лучшей сериализации
         return dict(counter)
-
-

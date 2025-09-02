@@ -8,6 +8,9 @@
 ## Запуск тестов
 ![Запуск тестов](/screenshots/Tests.png)
 
+## Проверка линтера
+![Проверка линтера](/screenshots/Pylint.png)
+
 ## Примеры команд
 ### Команды отчетов
 - python main.py --file example1.log --report average

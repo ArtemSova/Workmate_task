@@ -14,6 +14,8 @@ import pytest
 from reports.average_report import AverageReport
 from reports.status_report import StatusReport
 from reports.user_agent_report import UserAgentReport
+from utils.log_parser import _try_parse_json
+
 
 @pytest.fixture
 def sample_lines():
@@ -70,6 +72,18 @@ def test_average_report(sample_lines):
         assert result[url]["avg_time"] == pytest.approx(data["avg_time"])
 
 def test_status_report(sample_lines):
+    """
+    Unit-тест для StatusReport.
+
+    Проверяет что отчет корректно:
+    - Подсчитывает количество каждого статус-кода
+    - Игнорирует строки без поля status
+    - Возвращает правильное распределение
+
+    Args:
+        sample_lines_fixture: Фикстура с тестовыми данными
+    """
+
     report = StatusReport()
     result = report.generate(sample_lines)
     expected = {
@@ -129,19 +143,15 @@ def test_average_parsing(input_line, should_succeed, expected_url, expected_time
         expected_time: Ожидаемое время ответа (если есть)
     """
 
-    from utils.log_parser import _try_parse_json
-
     obj = _try_parse_json(input_line)
 
     if should_succeed and obj:
         ## Проверка успешного парсинга
         if expected_url is not None:
-             assert obj.get("url") == expected_url
+            assert obj.get("url") == expected_url
         if expected_time is not None:
-             assert float(obj.get("response_time")) == expected_time
+            assert float(obj.get("response_time")) == expected_time
     elif not should_succeed or obj is None:
         # Проверка неуспешного парсинга
         if expected_url is not None and obj:
-             assert obj.get("url") == expected_url
-
-
+            assert obj.get("url") == expected_url

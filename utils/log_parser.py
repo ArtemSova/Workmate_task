@@ -40,8 +40,8 @@ def _try_parse_json(line):
 
     try:
         return json.loads(line)
-    except Exception:
-        # Обрабатываем все возможные ошибки парсинга JSON
+    except (json.JSONDecodeError, TypeError, ValueError):
+        # Обрабатываем конкретные ошибки парсинга JSON
         return None
 
 

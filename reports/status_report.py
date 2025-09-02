@@ -1,3 +1,10 @@
+"""
+Модуль отчета по распределению HTTP статус-кодов.
+
+Этот модуль предоставляет класс StatusReport для анализа
+распределения HTTP статус-кодов на основе логов веб-сервера.
+"""
+
 from collections import Counter
 from utils.log_parser import _try_parse_json
 from .base import BaseReport
@@ -69,6 +76,3 @@ class StatusReport(BaseReport):
 
         # Возврат обычного словаря вместо Counter для лучшей сериализации
         return dict(counter)
-
-
-

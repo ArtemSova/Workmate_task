@@ -8,10 +8,10 @@
 Модуль использует pytest для создания тестов и временных файлов.
 """
 
-import pytest
-from utils.log_parser import _try_parse_json, load_lines
 import tempfile
 import os
+import pytest
+from utils.log_parser import _try_parse_json, load_lines
 
 
 @pytest.fixture
@@ -90,7 +90,7 @@ def test_load_lines_with_date_filter(temp_log_file):
     """
 
     lines = list(load_lines([temp_log_file], filter_date="2025-06-22"))
-    assert len([l for l in lines if '"@timestamp": "2025-06-22' in l]) == 2
+    assert len([line for line in lines if '"@timestamp": "2025-06-22' in line]) == 2
 
 def test_load_lines_with_date_filter_excludes_others(temp_log_file):
     """
@@ -121,9 +121,3 @@ def test_load_lines_no_filter_correct(temp_log_file):
 
     lines = list(load_lines([temp_log_file]))
     assert len(lines) == 4
-
-
-
-
-
-

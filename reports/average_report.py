@@ -1,3 +1,10 @@
+"""
+Модуль отчета по среднему времени ответа endpoint'ов.
+
+Этот модуль предоставляет класс AverageReport для анализа
+среднего времени ответа различных URL endpoint'ов на основе логов.
+"""
+
 from collections import defaultdict
 from utils.log_parser import _try_parse_json
 from .base import BaseReport
